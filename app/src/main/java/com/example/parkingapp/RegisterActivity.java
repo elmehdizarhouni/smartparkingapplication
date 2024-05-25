@@ -75,6 +75,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         final String email = emailEditText.getText().toString().trim();
         final String tel = telEditText.getText().toString().trim();
+        final int solde = 0;
         String password = passwordEditText.getText().toString().trim();
 
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -83,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
-                            saveUserToFirestore( nom, email, tel);
+                            saveUserToFirestore( nom, email, tel,solde);
                             progressBar.setVisibility(View.GONE);
                         } else {
                             Log.w("RegisterActivity", "createUserWithEmail:failure", task.getException());
@@ -95,11 +96,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 });
     }
 
-    private void saveUserToFirestore(String nom,  String email, String tel) {
+    private void saveUserToFirestore(String nom,  String email, String tel, int solde) {
         Map<String, Object> user = new HashMap<>();
         user.put("nom", nom);
 
         user.put("tel", tel);
+        user.put("solde", 0);
+
 
         db.collection("user").document(email)
                 .set(user)

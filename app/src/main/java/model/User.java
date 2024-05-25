@@ -3,6 +3,15 @@ package model;
 public class User {
 
     private String nom;
+    private int solde;
+
+    public int getSolde() {
+        return solde;
+    }
+
+    public void setSolde(int solde) {
+        this.solde = solde;
+    }
 
     private String tel;
     private String email;
