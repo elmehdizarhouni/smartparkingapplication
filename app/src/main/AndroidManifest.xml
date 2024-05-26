@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Parkingapp"
         tools:targetApi="31">
+
         <activity
             android:name=".ParkingsActivity"
             android:exported="false" />
@@ -23,6 +24,29 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+
+
+
+        <activity
+            android:name=".UpdateProfileActivity"
+
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+
+            android:exported="false" />
+        <activity
+            android:name=".SoldeActivity"
+
+            android:exported="false" />
+        <activity
+            android:name=".RechargeActivity"
+
+            android:exported="false" />
+        <activity android:name=".RegisterActivity" />
+        <activity
+            android:name=".AuthActivity"
+
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,9 +56,29 @@
         </activity>
 
 
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </manifest>

@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Parkingapp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Parkingapp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryVariant">@color/orange</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -12,5 +12,29 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.Parkingapp.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Parkingapp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Parkingapp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- Light mode -->
+    <!--screen bg if light mode-->
+    <style name="SCREEN">
+        <item name="android:background">#FFF</item>
+    </style>
+    <!--texts bg if light mode-->
+    <style name="TEXT">
+        <item name="android:textColor">#000</item>
+    </style>
+    <!-- botton bg if light mode-->
+    <style name="BUTTON">
+        <item name="android:background">@android:color/holo_orange_dark</item>
+        <item name="android:textColor">#FFF</item>
     </style>
 </resources>
