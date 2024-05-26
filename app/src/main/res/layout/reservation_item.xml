@@ -1,0 +1,29 @@
+<!-- res/layout/reservation_item.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/text_view_client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Client"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_view_parking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Parking"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/text_view_payed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Payed"
+        android:textSize="16sp" />
+</LinearLayout>

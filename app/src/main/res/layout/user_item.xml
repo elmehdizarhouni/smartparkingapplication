@@ -1,0 +1,29 @@
+<!-- res/layout/user_item.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/text_view_nom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nom"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_view_solde"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Solde"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/text_view_tel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Téléphone"
+        android:textSize="16sp" />
+</LinearLayout>
