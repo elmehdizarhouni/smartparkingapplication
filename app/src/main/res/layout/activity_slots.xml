@@ -1,0 +1,183 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#bdc3c7">
+
+    <!-- Entry Text -->
+    <TextView
+        android:id="@+id/entryText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Entry"
+        android:textColor="#000"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/entryImage"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginBottom="20dp" />
+
+    <!-- Entry Image -->
+    <ImageView
+        android:id="@+id/entryImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/entryText"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp" />
+
+    <!-- Divider line -->
+    <View
+        android:id="@+id/dividerLine"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#3e3e3e"
+        app:layout_constraintBottom_toTopOf="@+id/exitText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/entryImage"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <!-- Exit Text -->
+    <TextView
+        android:id="@+id/exitText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginBottom="20dp"
+        android:text="Exit"
+        android:textColor="#000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Parking spots layout -->
+    <LinearLayout
+        android:id="@+id/parkingSpotsLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="45dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/dividerLine"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <RelativeLayout
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="-50dp"
+            android:background="@drawable/dotted_border"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/parkingSpotA11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="A-11"
+                android:textColor="#808080"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/carImageA11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/car" />
+
+        </RelativeLayout>
+
+        <!-- Parking Spot A-10 -->
+        <RelativeLayout
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="-50dp"
+            android:background="@drawable/dotted_border"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/parkingSpotA10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="A-10"
+                android:textColor="#808080"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/carImageA10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/car" />
+
+        </RelativeLayout>
+
+        <!-- Parking Spot A-12 -->
+        <RelativeLayout
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="-50dp"
+            android:background="@drawable/dotted_border"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/parkingSpotA12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="A-12"
+                android:textColor="#808080"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/carImageA12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/car" />
+
+        </RelativeLayout>
+
+        <!-- Parking Spot A-14 -->
+        <RelativeLayout
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="-50dp"
+            android:background="@drawable/dotted_border"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/parkingSpotA14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="A-14"
+                android:textColor="#808080"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/carImageA14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/car" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

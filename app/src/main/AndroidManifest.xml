@@ -39,7 +39,9 @@
         <activity
             android:name=".ProfileUserActivity"
             android:exported="false" />
-
+        <activity
+            android:name=".SlotsActivity"
+            android:exported="false" />
 
         <activity
             android:name=".UpdateProfileActivity"

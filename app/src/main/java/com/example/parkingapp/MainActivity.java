@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Lancer l'activité UsersActivity
-                Intent intent = new Intent(MainActivity.this, ParkingsActivity.class);
+                Intent intent = new Intent(MainActivity.this, SlotsActivity.class);
                 startActivity(intent);
             }
         });

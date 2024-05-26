@@ -38,14 +38,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="75dp"
-                android:layout_marginBottom="40dp"
-                android:text="Hi, Admin"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_bias="0.28" />
+                    android:layout_marginBottom="40dp"
+                    android:text="Hi, Admin"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintVertical_bias="0.28" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -227,13 +227,13 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.081"
-                        app:srcCompat="@drawable/btn_1" />
+                        app:srcCompat="@drawable/subscription" />
 
                     <TextView
                         android:id="@+id/textView9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Developing"
+                        android:text="Subscriptions"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold"
