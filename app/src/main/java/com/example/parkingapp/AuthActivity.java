@@ -84,6 +84,7 @@ public class AuthActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser currentUser) {
         if (currentUser != null) {
+            
             Intent MyIntent= new Intent(this, MainActivity.class);
             MyIntent.putExtra("email", currentUser.getEmail());
             startActivity(MyIntent);

@@ -55,7 +55,7 @@
 
 
     <LinearLayout
-        android:id="@+id/nav_calendar"
+        android:id="@+id/nav_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -107,7 +107,7 @@
 
 
     <LinearLayout
-        android:id="@+id/nav_help"
+        android:id="@+id/nav_clients"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -128,7 +128,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/nav_share"
+        android:id="@+id/nav_reservations"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -149,7 +149,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/nav_dark"
+        android:id="@+id/nav_parking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -171,7 +171,7 @@
 
 
     <LinearLayout
-        android:id="@+id/nav_home"
+        android:id="@+id/nav_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
