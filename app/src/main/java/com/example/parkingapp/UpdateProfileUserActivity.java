@@ -21,7 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import model.User;
 
-public class UpdateProfileActivity extends AppCompatActivity {
+public class UpdateProfileUserActivity extends AppCompatActivity {
 
     private static final String TAG = "UpdateProfileActivity";
 
@@ -35,7 +35,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_user);
+        setContentView(R.layout.activity_update_user_not_admin);
 
         editProfileName = findViewById(R.id.profile_name);
 
@@ -107,7 +107,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 String tel = editProfileNumber.getText().toString();
 
 
-
                 db.collection("user").document(userEmail).update("tel", tel, "nom", nom)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -115,16 +114,16 @@ public class UpdateProfileActivity extends AppCompatActivity {
                                 progressBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
                                     Log.d(TAG, "User profile updated successfully");
-                                    Toast.makeText(UpdateProfileActivity.this, "Profil mis à jour avec succès", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(UpdateProfileUserActivity.this, "Profil mis à jour avec succès", Toast.LENGTH_SHORT).show();
                                     // Redirection vers ProfileActivity
-                                    Intent intent = new Intent(UpdateProfileActivity.this, ProfileActivity.class);
+                                    Intent intent = new Intent(UpdateProfileUserActivity.this, ProfileUserActivity.class);
                                     startActivity(intent);
 
                                     // (Optionnel) Terminer l'activité actuelle si vous ne voulez pas permettre un retour à UpdateProfileActivity
                                     finish();
                                 } else {
                                     Log.d(TAG, "Error updating profile", task.getException());
-                                    Toast.makeText(UpdateProfileActivity.this, "Erreur de mise à jour du profil", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(UpdateProfileUserActivity.this, "Erreur de mise à jour du profil", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

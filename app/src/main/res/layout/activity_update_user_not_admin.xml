@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ProfileActivity">
+    tools:context=".UpdateProfileActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <TextView
+                <EditText
                     android:id="@+id/profile_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
 
 
 
-                <TextView
+                <EditText
                     android:id="@+id/profile_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="14dp"
-                    android:text="Update"
+                    android:text="Save"
                     android:textAllCaps="false"
                     android:textStyle="bold"
                     android:layout_gravity="center"
@@ -90,7 +90,6 @@
         android:layout_gravity="start">
 
         <include
-
-            layout="@layout/nav_drawer"/>
+            layout="@layout/nav_drawer_user"/>
     </RelativeLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

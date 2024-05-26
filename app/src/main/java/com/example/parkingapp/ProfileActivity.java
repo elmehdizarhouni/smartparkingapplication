@@ -40,6 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     ImageView menu, logout;
     LinearLayout menunav , profile, clients,reservations,parkings, logoutnav ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         drawerLayout = findViewById(R.id.drawer_layout);
         menu = findViewById(R.id.menu);
+
         logout = findViewById(R.id.logout);
         menunav = findViewById(R.id.nav_menu);
         profile = findViewById(R.id.nav_profile);

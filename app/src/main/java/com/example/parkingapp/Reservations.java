@@ -1,9 +1,11 @@
 package com.example.parkingapp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -27,7 +30,9 @@ public class Reservations extends AppCompatActivity {
     private FloatingActionButton addReservation;
     RecyclerView myrecycler;
     FirebaseFirestore db;
+    FirebaseAuth mAuth;
     LinkedList<ReservationModel> reservations;
+    LinearLayout solde,profile,reservationss,logout;
 
 
 
@@ -35,6 +40,41 @@ public class Reservations extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reservation);
+        profile = findViewById(R.id.nav_profile);
+        solde = findViewById(R.id.nav_solde);
+        reservationss =findViewById(R.id.nav_reservations);
+        logout=findViewById(R.id.nav_logout);
+
+
+        logout.setOnClickListener((v) -> {
+            // Sign out the user
+            FirebaseAuth.getInstance().signOut();
+
+            // Start LoginActivity and finish current activity
+            Intent loginIntent = new Intent(Reservations.this, AuthActivity.class);
+            startActivity(loginIntent);
+            finish();
+        });
+        reservationss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recreate();
+
+            }
+        });
+        solde.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectActivity(Reservations.this, SoldeActivity.class);
+            }
+        });
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                redirectActivity(Reservations.this, ProfileUserActivity.class);
+            }
+        });
+
         addReservation = (FloatingActionButton) findViewById(R.id.fab);
         db = FirebaseFirestore.getInstance();
         reservations = new LinkedList<>();
@@ -53,8 +93,18 @@ public class Reservations extends AppCompatActivity {
 
     }
 
+
+    public static void redirectActivity(Activity activity, Class secondActivity){
+        Intent intent = new Intent(activity, secondActivity);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        activity.startActivity(intent);
+        activity.finish();
+    }
+
     private void getReservations(){
-        db.collection("reservation").whereEqualTo("client", "rachidisadek@gmail.com").get()
+        mAuth = FirebaseAuth.getInstance();
+        String userEmail = mAuth.getCurrentUser().getEmail();
+        db.collection("reservation").whereEqualTo("client", userEmail).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {

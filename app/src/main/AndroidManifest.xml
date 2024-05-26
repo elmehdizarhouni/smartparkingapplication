@@ -20,11 +20,25 @@
             android:name=".ReservationsActivity"
             android:exported="false" />
         <activity
+            android:name=".Reservations"
+            android:exported="false" />
+        <activity
             android:name=".UsersActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"/>
-
+        <activity
+            android:name=".AddReservation"
+            android:exported="false" />
+        <activity
+            android:name=".UpdateReservation"
+            android:exported="false" />
+        <activity
+            android:name=".UpdateProfileUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileUserActivity"
+            android:exported="false" />
 
 
         <activity

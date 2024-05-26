@@ -1,9 +1,12 @@
 package com.example.parkingapp;
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -12,11 +15,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class AuthActivity extends AppCompatActivity {
 
@@ -84,13 +90,42 @@ public class AuthActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser currentUser) {
         if (currentUser != null) {
-            
-            Intent MyIntent= new Intent(this, MainActivity.class);
-            MyIntent.putExtra("email", currentUser.getEmail());
-            startActivity(MyIntent);
+            String userEmail = currentUser.getEmail();
+            if (userEmail != null) {
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                db.collection("user").document(userEmail).get()
+                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful() && task.getResult() != null) {
+                                    DocumentSnapshot document = task.getResult();
+                                    if (document.exists()) {
+                                        String role = document.getString("role");
+
+                                        if ("client".equals(role)) {
+                                            Intent myIntent = new Intent(AuthActivity.this, Reservations.class);
+                                            myIntent.putExtra("email", userEmail);
+                                            startActivity(myIntent);
+                                        } else {
+                                            Intent myIntent = new Intent(AuthActivity.this, MainActivity.class);
+                                            myIntent.putExtra("email", userEmail);
+                                            startActivity(myIntent);
+                                        }
+
+                                        Log.d(TAG, "User profile loaded: " + role);
+                                    } else {
+                                        Log.d(TAG, "No such document");
+                                    }
+                                } else {
+                                    Log.d(TAG, "get failed with ", task.getException());
+                                }
+                            }
+                        });
+            }
         } else {
             // User is signed out
             // Redirect or show error message
         }
     }
+
 }

@@ -23,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.card.MaterialCardView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -35,6 +36,7 @@ import model.ReservationModel;
 
 public class UpdateReservation extends AppCompatActivity {
     Button dayPicker;
+    FirebaseAuth mAuth;
     ProgressBar parkingProgressBar;
     ProgressBar priceProgressBar;
     FirebaseFirestore db;
@@ -293,6 +295,8 @@ public class UpdateReservation extends AppCompatActivity {
         pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mAuth = FirebaseAuth.getInstance();
+                String userEmail = mAuth.getCurrentUser().getEmail();
                 String id = day + month + year + hours + minutes + endHours + endMinutes + parkingChosen;
                 Map<String, Object> reserv = new HashMap<>();
                 reserv.put("day", day);
@@ -302,7 +306,7 @@ public class UpdateReservation extends AppCompatActivity {
                 reserv.put("startMinutes", minutes);
                 reserv.put("endHour", endHours);
                 reserv.put("endMinutes", endMinutes);
-                reserv.put("client", "rachidisadek@gmail.com");
+                reserv.put("client", userEmail);
                 reserv.put("payed", true);
                 reserv.put("parking", parkingChosen);
                 db.collection("reservation").document(reservation.getId()).delete()

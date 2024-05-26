@@ -4,6 +4,15 @@ public class User {
 
     private String nom;
     private int solde;
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public int getSolde() {
         return solde;
