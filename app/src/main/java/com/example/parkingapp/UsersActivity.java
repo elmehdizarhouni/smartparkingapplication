@@ -1,4 +1,6 @@
+// UsersActivity.java
 package com.example.parkingapp;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,7 +32,7 @@ public class UsersActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     DrawerLayout drawerLayout;
     ImageView menu, logout;
-    LinearLayout menunav , profile, clients,reservations,parkings, logoutnav ;
+    LinearLayout menunav, profile, clients, reservations, parkings, logoutnav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +44,9 @@ public class UsersActivity extends AppCompatActivity {
         menunav = findViewById(R.id.nav_menu);
         profile = findViewById(R.id.nav_profile);
         clients = findViewById(R.id.nav_clients);
-        reservations=findViewById(R.id.nav_reservations);
-        parkings=findViewById(R.id.nav_parking);
-        logoutnav=findViewById(R.id.nav_logout);
-
+        reservations = findViewById(R.id.nav_reservations);
+        parkings = findViewById(R.id.nav_parking);
+        logoutnav = findViewById(R.id.nav_logout);
 
         logout.setOnClickListener((v) -> {
             // Sign out the user
@@ -57,9 +58,6 @@ public class UsersActivity extends AppCompatActivity {
             finish();
         });
 
-
-
-
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,8 +65,6 @@ public class UsersActivity extends AppCompatActivity {
 
             }
         });
-
-
 
         clients.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,16 +121,15 @@ public class UsersActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
-        // Récupérer la liste des utilisateurs depuis Firestore
+        // Retrieve the list of users from Firestore
         getUsersFromFirestore();
     }
-    public static void openDrawer(DrawerLayout drawerLayout){
+
+    public static void openDrawer(DrawerLayout drawerLayout) {
         drawerLayout.openDrawer(GravityCompat.START);
     }
 
-
-
-    public static void redirectActivity(Activity activity, Class secondActivity){
+    public static void redirectActivity(Activity activity, Class secondActivity) {
         Intent intent = new Intent(activity, secondActivity);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
@@ -150,10 +145,10 @@ public class UsersActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String nom = document.getString("nom");
-                                Double solde = document.getDouble("solde");  // Utilisation de getDouble pour récupérer solde
+                                Double solde = document.getDouble("solde");
                                 String tel = document.getString("tel");
 
-                                // Vérification si solde n'est pas null
+                                // Check if solde is not null
                                 double soldeValue = (solde != null) ? solde : 0.0;
 
                                 User user = new User(nom, soldeValue, tel);
@@ -167,6 +162,4 @@ public class UsersActivity extends AppCompatActivity {
                     }
                 });
     }
-
-
 }

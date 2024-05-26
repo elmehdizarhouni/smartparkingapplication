@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +32,7 @@ import org.json.JSONObject;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -51,11 +53,14 @@ public class AddReservation extends AppCompatActivity {
     String hours;
     String minutes;
     String endHours;
+    double predictedOccupancy;
     String endMinutes;
     TextView dateAndDay;
     TextView price;
     Boolean dayPicked;
     Boolean TimePicked;
+    String totalPrice;
+    String priceView;
     GridLayout gridLayout;
     MaterialCardView park1;
     MaterialCardView park2;
@@ -63,7 +68,10 @@ public class AddReservation extends AppCompatActivity {
     MaterialCardView park4;
     MaterialCardView priceCard;
     String parkingChosen;
+
+    double solde;
     Button pay;
+
     FirebaseAuth mAuth;
     ExecutorService parkingService;
     ExecutorService priceService;
@@ -145,7 +153,7 @@ public class AddReservation extends AppCompatActivity {
                             });
 
                             try {
-                                URL url = new URL("https://22b0-196-92-7-82.ngrok-free.app/predict"); // Remplacez par l'URL publique de Ngrok
+                                URL url = new URL("https://a53a-196-92-7-82.ngrok-free.app/predict"); // Remplacez par l'URL publique de Ngrok
                                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                                 conn.setRequestMethod("POST");
                                 conn.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -162,17 +170,11 @@ public class AddReservation extends AppCompatActivity {
                                 try (Scanner scanner = new Scanner(conn.getInputStream(), "UTF-8")) {
                                     String response = scanner.useDelimiter("\\A").next();
                                     JSONObject jsonResponse = new JSONObject(response);
-                                    double predictedOccupancy = jsonResponse.getDouble("predicted_occupancy")*100;
-                                    if (predictedOccupancy > 70) {
-                                        price.setText("5 DH");
-                                    } else if (predictedOccupancy > 80) {
-                                        price.setText("7 DH");
-                                    } else if (predictedOccupancy > 90) {
-                                        price.setText("10 DH");
-                                    } else {
-                                        price.setText("3 DH");
-                                    }
+                                    predictedOccupancy = jsonResponse.getDouble("predicted_occupancy")*100;
+                                    Log.d("dt", "the response is : "+ predictedOccupancy);
+
                                 }
+
 
                                 conn.disconnect();
                             } catch (Exception e) {
@@ -182,6 +184,30 @@ public class AddReservation extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    if (predictedOccupancy > 70 && predictedOccupancy < 80) {
+                                        DecimalFormat df = new DecimalFormat("#.00");
+                                        totalPrice = df.format(calculateDurationInMinutes(hours, minutes, endHours, endMinutes)*0.13);
+                                        priceView = String.valueOf(totalPrice) + " DH";
+                                        Log.d("d", "her");
+                                    } else if (predictedOccupancy > 80 && predictedOccupancy < 90) {
+                                        DecimalFormat df = new DecimalFormat("#.00");
+                                        totalPrice = df.format(calculateDurationInMinutes(hours, minutes, endHours, endMinutes)*0.13);
+
+                                        priceView = String.valueOf(totalPrice) + " DH";
+                                        Log.d("d", "herr");
+                                    } else if (predictedOccupancy > 90) {
+                                        DecimalFormat df = new DecimalFormat("#.00");
+                                        totalPrice = df.format(calculateDurationInMinutes(hours, minutes, endHours, endMinutes)*0.13);
+
+                                        priceView = String.valueOf(totalPrice) + " DH";
+                                        Log.d("d", "herrr");
+                                    } else {
+                                        DecimalFormat df = new DecimalFormat("#.00");
+                                        totalPrice = df.format(calculateDurationInMinutes(hours, minutes, endHours, endMinutes)*0.13);
+                                        priceView = String.valueOf(totalPrice) + " DH";
+                                        Log.d("d", "herrrr");
+                                    }
+                                    price.setText(priceView);
                                     priceProgressBar.setVisibility(View.GONE);
                                     price.setVisibility(View.VISIBLE);
                                 }
@@ -206,7 +232,7 @@ public class AddReservation extends AppCompatActivity {
                             });
 
                             try {
-                                URL url = new URL("https://22b0-196-92-7-82.ngrok-free.app/predict"); // Remplacez par l'URL publique de Ngrok
+                                URL url = new URL("https://a53a-196-92-7-82.ngrok-free.app/predict"); // Remplacez par l'URL publique de Ngrok
                                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                                 conn.setRequestMethod("POST");
                                 conn.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -224,16 +250,9 @@ public class AddReservation extends AppCompatActivity {
                                     String response = scanner.useDelimiter("\\A").next();
                                     JSONObject jsonResponse = new JSONObject(response);
                                     double predictedOccupancy = jsonResponse.getDouble("predicted_occupancy")*100;
+                                    Log.d("dt", "the response is : "+ predictedOccupancy);
                                     Log.d("res", "response is: " + predictedOccupancy);
-                                    if (predictedOccupancy > 70) {
-                                        price.setText("5 DH");
-                                    } else if (predictedOccupancy > 80) {
-                                        price.setText("7 DH");
-                                    } else if (predictedOccupancy > 90) {
-                                        price.setText("10 DH");
-                                    } else {
-                                        price.setText("3 DH");
-                                    }
+
                                 }
 
                                 conn.disconnect();
@@ -244,6 +263,30 @@ public class AddReservation extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    if (predictedOccupancy > 70 && predictedOccupancy < 80) {
+                                        DecimalFormat df = new DecimalFormat("#.00");
+                                        totalPrice = df.format(calculateDurationInMinutes(hours, minutes, endHours, endMinutes)*0.13);
+                                        priceView = String.valueOf(totalPrice) + " DH";
+                                        Log.d("d", "her");
+                                    } else if (predictedOccupancy > 80 && predictedOccupancy < 90) {
+                                        DecimalFormat df = new DecimalFormat("#.00");
+                                        totalPrice = df.format(calculateDurationInMinutes(hours, minutes, endHours, endMinutes)*0.13);
+
+                                        priceView = String.valueOf(totalPrice) + " DH";
+                                        Log.d("d", "herr");
+                                    } else if (predictedOccupancy > 90) {
+                                        DecimalFormat df = new DecimalFormat("#.00");
+                                        totalPrice = df.format(calculateDurationInMinutes(hours, minutes, endHours, endMinutes)*0.13);
+
+                                        priceView = String.valueOf(totalPrice) + " DH";
+                                        Log.d("d", "herrr");
+                                    } else {
+                                        DecimalFormat df = new DecimalFormat("#.00");
+                                        totalPrice = df.format(calculateDurationInMinutes(hours, minutes, endHours, endMinutes)*0.13);
+                                        priceView = String.valueOf(totalPrice) + " DH";
+                                        Log.d("d", "herrrr");
+                                    }
+                                    price.setText(priceView);
                                     priceProgressBar.setVisibility(View.GONE);
                                     price.setVisibility(View.VISIBLE);
                                 }
@@ -268,7 +311,7 @@ public class AddReservation extends AppCompatActivity {
                             });
 
                             try {
-                                URL url = new URL("https://22b0-196-92-7-82.ngrok-free.app/predict"); // Remplacez par l'URL publique de Ngrok
+                                URL url = new URL("https://a53a-196-92-7-82.ngrok-free.app/predict"); // Remplacez par l'URL publique de Ngrok
                                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                                 conn.setRequestMethod("POST");
                                 conn.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -286,16 +329,9 @@ public class AddReservation extends AppCompatActivity {
                                     String response = scanner.useDelimiter("\\A").next();
                                     JSONObject jsonResponse = new JSONObject(response);
                                     double predictedOccupancy = jsonResponse.getDouble("predicted_occupancy")*100;
+                                    Log.d("dt", "the response is : "+ predictedOccupancy);
                                     Log.d("res", "response is: " + predictedOccupancy);
-                                    if (predictedOccupancy > 70) {
-                                        price.setText("5 DH");
-                                    } else if (predictedOccupancy > 80) {
-                                        price.setText("7 DH");
-                                    } else if (predictedOccupancy > 90) {
-                                        price.setText("10 DH");
-                                    } else {
-                                        price.setText("3 DH");
-                                    }
+
                                 }
 
                                 conn.disconnect();
@@ -306,6 +342,30 @@ public class AddReservation extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    if (predictedOccupancy > 70 && predictedOccupancy < 80) {
+                                        DecimalFormat df = new DecimalFormat("#.00");
+                                        totalPrice = df.format(calculateDurationInMinutes(hours, minutes, endHours, endMinutes)*0.13);
+                                        priceView = String.valueOf(totalPrice) + " DH";
+                                        Log.d("d", "her");
+                                    } else if (predictedOccupancy > 80 && predictedOccupancy < 90) {
+                                        DecimalFormat df = new DecimalFormat("#.00");
+                                        totalPrice = df.format(calculateDurationInMinutes(hours, minutes, endHours, endMinutes)*0.13);
+
+                                        priceView = String.valueOf(totalPrice) + " DH";
+                                        Log.d("d", "herr");
+                                    } else if (predictedOccupancy > 90) {
+                                        DecimalFormat df = new DecimalFormat("#.00");
+                                        totalPrice = df.format(calculateDurationInMinutes(hours, minutes, endHours, endMinutes)*0.13);
+
+                                        priceView = String.valueOf(totalPrice) + " DH";
+                                        Log.d("d", "herrr");
+                                    } else {
+                                        DecimalFormat df = new DecimalFormat("#.00");
+                                        totalPrice = df.format(calculateDurationInMinutes(hours, minutes, endHours, endMinutes)*0.13);
+                                        priceView = String.valueOf(totalPrice) + " DH";
+                                        Log.d("d", "herrrr");
+                                    }
+                                    price.setText(priceView);
                                     priceProgressBar.setVisibility(View.GONE);
                                     price.setVisibility(View.VISIBLE);
                                 }
@@ -330,7 +390,7 @@ public class AddReservation extends AppCompatActivity {
                             });
 
                             try {
-                                URL url = new URL("https://22b0-196-92-7-82.ngrok-free.app/predict"); // Remplacez par l'URL publique de Ngrok
+                                URL url = new URL("https://a53a-196-92-7-82.ngrok-free.app/predict"); // Remplacez par l'URL publique de Ngrok
                                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                                 conn.setRequestMethod("POST");
                                 conn.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -349,15 +409,7 @@ public class AddReservation extends AppCompatActivity {
                                     JSONObject jsonResponse = new JSONObject(response);
                                     double predictedOccupancy = jsonResponse.getDouble("predicted_occupancy")*100;
                                     Log.d("res", "response is: " + predictedOccupancy);
-                                    if (predictedOccupancy > 70) {
-                                        price.setText("5 DH");
-                                    } else if (predictedOccupancy > 80) {
-                                        price.setText("7 DH");
-                                    } else if (predictedOccupancy > 90) {
-                                        price.setText("10 DH");
-                                    } else {
-                                        price.setText("3 DH");
-                                    }
+
                                 }
 
                                 conn.disconnect();
@@ -367,6 +419,30 @@ public class AddReservation extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    if (predictedOccupancy > 70 && predictedOccupancy < 80) {
+                                        DecimalFormat df = new DecimalFormat("#.00");
+                                        totalPrice = df.format(calculateDurationInMinutes(hours, minutes, endHours, endMinutes)*0.13);
+                                        priceView = String.valueOf(totalPrice) + " DH";
+                                        Log.d("d", "her");
+                                    } else if (predictedOccupancy > 80 && predictedOccupancy < 90) {
+                                        DecimalFormat df = new DecimalFormat("#.00");
+                                        totalPrice = df.format(calculateDurationInMinutes(hours, minutes, endHours, endMinutes)*0.13);
+
+                                        priceView = String.valueOf(totalPrice) + " DH";
+                                        Log.d("d", "herr");
+                                    } else if (predictedOccupancy > 90) {
+                                        DecimalFormat df = new DecimalFormat("#.00");
+                                        totalPrice = df.format(calculateDurationInMinutes(hours, minutes, endHours, endMinutes)*0.13);
+
+                                        priceView = String.valueOf(totalPrice) + " DH";
+                                        Log.d("d", "herrr");
+                                    } else {
+                                        DecimalFormat df = new DecimalFormat("#.00");
+                                        totalPrice = df.format(calculateDurationInMinutes(hours, minutes, endHours, endMinutes)*0.13);
+                                        priceView = String.valueOf(totalPrice) + " DH";
+                                        Log.d("d", "herrrr");
+                                    }
+                                    price.setText(priceView);
                                     priceProgressBar.setVisibility(View.GONE);
                                     price.setVisibility(View.VISIBLE);
                                 }
@@ -403,11 +479,27 @@ public class AddReservation extends AppCompatActivity {
                 reserv.put("client", userEmail);
                 reserv.put("payed", true);
                 reserv.put("parking", parkingChosen);
+                db.collection("user").document(userEmail).get()
+                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if (documentSnapshot.exists()) {
+                                    // Retrieve the 'solde' field
+                                    solde = documentSnapshot.getDouble("solde");
+
+                                    // Handle the retrieved solde value
+                                    Log.d("s", "solde is" + String.valueOf(solde));
+                                } else {
+                                    Log.d("s", "no solde");
+                                }
+                            }
+                        });
                 db.collection("reservation").document(id).set(reserv)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()){
+                                    db.collection("user").document(userEmail).update("solde", solde - Double.parseDouble(totalPrice.replace(",", ".")));
                                     Toast.makeText(AddReservation.this, "la reservation est ajouté", Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(AddReservation.this, Reservations.class);
                                     startActivity(intent);
@@ -552,25 +644,22 @@ public class AddReservation extends AppCompatActivity {
         }
     }
 
-    private void getPrice(){
-        try {
-            // Pause execution for 3 seconds (3000 milliseconds)
-            Thread.sleep(3000);
 
-            // Alternative using TimeUnit for better readability
-            // TimeUnit.SECONDS.sleep(3);
 
-        } catch (InterruptedException e) {
-            // Handle the exception if the sleep is interrupted
-            System.out.println("Sleep was interrupted");
-            Thread.currentThread().interrupt(); // Preserve interrupt status
+
+    public static int calculateDurationInMinutes(String startHours, String startMinutes, String endHours, String endMinutes) {
+        // Convert start time and end time to total minutes
+        int startTotalMinutes = Integer.parseInt(startHours) * 60 + Integer.parseInt(startMinutes);
+        int endTotalMinutes = Integer.parseInt(endHours) * 60 + Integer.parseInt(endMinutes);
+
+        // Calculate the duration in minutes
+        int durationMinutes = endTotalMinutes - startTotalMinutes;
+
+        // If the duration is negative, it means the end time is on the next day
+        if (durationMinutes < 0) {
+            durationMinutes += 24 * 60; // Add 24 hours in minutes
         }
 
-        price.setText("10 DH");
-    }
-
-
-    private void AssignDates() {
-
+        return durationMinutes;
     }
 }
