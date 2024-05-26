@@ -489,7 +489,31 @@ public class AddReservation extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 DocumentSnapshot document = task.getResult();
                                 if (document.exists()) {
-                                    // Document exists
+                                    parkingProgressBar.setVisibility(View.GONE);
+                                    gridLayout.setVisibility(View.VISIBLE);
+                                    char lastChar = id.charAt(id.length() - 1);
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            switch (lastChar) {
+                                                case '1':
+                                                    park1.setCardBackgroundColor(Color.RED);
+                                                    break;
+                                                case '2':
+                                                    park2.setCardBackgroundColor(Color.RED);
+                                                    break;
+                                                case '3':
+                                                    park3.setCardBackgroundColor(Color.RED);
+                                                    break;
+                                                case '4':
+                                                    park4.setCardBackgroundColor(Color.RED);
+                                                    break;
+                                                default:
+                                                    Log.d("CheckAvailability", "Index is out of expected range.");
+                                                    break;
+                                            }
+                                        }
+                                    });
 
                                 } else {
                                     // Document does not exist
