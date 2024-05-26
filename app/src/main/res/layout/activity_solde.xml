@@ -15,7 +15,6 @@
         android:backgroundTint="@color/white"
         android:background="@drawable/rounded_corner">
 
-
         <ImageView
             android:id="@+id/solde"
             android:layout_width="match_parent"

@@ -35,21 +35,13 @@
             android:layout_height="30dp"
             android:layout_gravity="bottom"  android:fontFamily="@font/alice"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
-            android:text="@string/nav_header_title"
+            android:text="Welcome , admin"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/black"
             android:textStyle="bold" />
 
 
-        <TextView
-            android:id="@+id/nav_header_email"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_gravity="bottom"
-            android:fontFamily="@font/alice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/nav_header_subtitle" />
+
 
 
     </LinearLayout>
@@ -73,9 +65,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/baseline_event_24"
+            android:drawableLeft="@drawable/baseline_menu_24"
             android:drawablePadding="8dp"
-            android:text="Calendar"
+            android:text="menu"
             android:fontFamily="@font/alice"
             android:textColor="@color/orange"
             android:textSize="20sp"
@@ -125,9 +117,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/baseline_help_24"
+            android:drawableLeft="@drawable/baseline_client_24"
             android:drawablePadding="8dp"
-            android:text="Help"
+            android:text="clients"
             android:fontFamily="@font/alice"
             android:textColor="@color/orange"
             android:textSize="20sp"
@@ -146,9 +138,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/baseline_share_24"
+            android:drawableLeft="@drawable/baseline_note_alt_24"
             android:drawablePadding="8dp"
-            android:text="Share"
+            android:text="reservations"
             android:fontFamily="@font/alice"
             android:textColor="@color/orange"
             android:textSize="20sp"
@@ -169,9 +161,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/baseline_dark_mode_24"
+            android:drawableLeft="@drawable/baseline_parking_24"
             android:drawablePadding="8dp"
-            android:text="Dark Mode"
+            android:text="parkings"
             android:fontFamily="@font/alice"
             android:textColor="@color/orange"
             android:textSize="20sp" />

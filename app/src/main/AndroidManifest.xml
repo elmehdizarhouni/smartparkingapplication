@@ -23,7 +23,7 @@
             android:name=".UsersActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".MainActivity"/>
 
 
 
