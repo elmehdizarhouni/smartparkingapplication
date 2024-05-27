@@ -75,6 +75,7 @@ public class AddReservation extends AppCompatActivity {
     FirebaseAuth mAuth;
     ExecutorService parkingService;
     ExecutorService priceService;
+    String hexColor = "#CC002379";
 
 
     @SuppressLint("MissingInflatedId")
@@ -617,16 +618,16 @@ public class AddReservation extends AppCompatActivity {
                                         public void run() {
                                             switch (lastChar) {
                                                 case '1':
-                                                    park1.setCardBackgroundColor(Color.GREEN);
+                                                    park1.setCardBackgroundColor(Color.parseColor(hexColor));
                                                     break;
                                                 case '2':
-                                                    park2.setCardBackgroundColor(Color.GREEN);
+                                                    park2.setCardBackgroundColor(Color.parseColor(hexColor));
                                                     break;
                                                 case '3':
-                                                    park3.setCardBackgroundColor(Color.GREEN);
+                                                    park3.setCardBackgroundColor(Color.parseColor(hexColor));
                                                     break;
                                                 case '4':
-                                                    park4.setCardBackgroundColor(Color.GREEN);
+                                                    park4.setCardBackgroundColor(Color.parseColor(hexColor));
                                                     break;
                                                 default:
                                                     Log.d("CheckAvailability", "Index is out of expected range.");

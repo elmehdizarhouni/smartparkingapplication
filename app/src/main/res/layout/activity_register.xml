@@ -10,9 +10,9 @@
 
     <ImageView
         android:id="@+id/reg_img"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/parking"
+        android:layout_width="280dp"
+        android:layout_height="190dp"
+        android:src="@drawable/streert_parking"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -97,6 +97,7 @@
         android:text="Sign Up"
         android:textAllCaps="false"
         android:textStyle="bold"
+        android:background="@drawable/btn_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
